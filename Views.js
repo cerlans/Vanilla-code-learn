@@ -31,7 +31,7 @@ export let home = () =>{
             </div>
             <div class='sign-in'>
                <h1>Learn to code with curated video tutorials</h1>
-               <button>Create An Account</button>
+               <a href='#/Login'><button>Create An Account</button></a>
             </div>`
     view.innerHTML = verify
 });
@@ -78,8 +78,9 @@ export let login = () => {
     </div>`;
     view.innerHTML = text
       // Initialize the FirebaseUI Widget using Firebase.
-      var ui = new firebaseui.auth.AuthUI(firebase.auth());
-      // The start method will wait until the DOM is loaded.
+      // watches for an existing instance, if one exists, retrieves the instance otherwise it creates a new one
+    const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth())     
+     // The start method will wait until the DOM is loaded.
       ui.start('#firebaseui-auth-container', uiConfig);
 }
 
