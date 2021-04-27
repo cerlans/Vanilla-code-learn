@@ -10,7 +10,7 @@ import {about, home, login, topics} from './Views.js'
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
- 
+
  /* youtube v3 data API loading */
  const loadClient =() => {
    gapi.client.setApiKey("AIzaSyCFiBdff1JxkTe4F_0auryiuqiYMIJd48g");
@@ -23,16 +23,24 @@ import {about, home, login, topics} from './Views.js'
     gapi.load("client", loadClient);
 })()
 
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+   console.log(user)
+  } else {
+    // No user is signed in.
+  }
+});
 
-
-
-function logOut(){
+(function() {
+const signOutButton= document.getElementById('logOut')
+signOutButton.addEventListener('click',()=>{
   firebase.auth().signOut().then(function() {
     console.log('sign out worked')
 }, function(error) {
   console.log(error)
 });
-}
+})
+})()
 
 let routes = {
     '/': home,
