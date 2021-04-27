@@ -1,4 +1,5 @@
 /* these shared view panes will replace the contents off .informationView class in the html whenever the route is changed */
+import {listTopics} from './List.js'
 
 export let about =()=>{
   
@@ -40,12 +41,13 @@ export let home = () =>{
 export let topics =()=>{
   firebase.auth().onAuthStateChanged(function(user) {
         const view = document.getElementById('informationView')
-
+        // in reality all i really need to change here is the span, but im re-writing the entire html tree
           let verify = user ? (` <h1>What do you want to learn?</h1>
                                 <p>You are signed in</p>
+                                ${listTopics}
           `): (` <h1>What do you want to learn?</h1>
                 <p>Sign up for an account to add tutorials to your subscriptions and take notes!</p>
-                
+                ${listTopics}
           `)
           view.innerHTML = verify
   })

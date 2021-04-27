@@ -19,7 +19,7 @@ import {about, home, login, topics} from './Views.js'
               function(err) { console.error("Error loading GAPI client for API", err); });
  }
  
-(function() {
+(() => {
     gapi.load("client", loadClient);
 })()
 

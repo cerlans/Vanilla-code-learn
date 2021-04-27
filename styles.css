@@ -57,10 +57,42 @@ button {
  cursor:pointer;
 }
 
+/* About pane */
 .about {
   text-align:left !important;
   padding:1rem;
 }
 .about p {
   padding:1rem;
+}
+
+/* Topics pane*/
+
+.topics-cont {
+  width:100%;
+  padding:2rem;
+  margin-bottom:3rem;
+  text-transform:uppercase;
+}
+.topics-card {
+  border:1px solid black;
+  display:flex;
+  cursor:pointer;
+  padding:1rem;
+  margin-bottom:1rem;
+  width:100%;
+}
+.topics-card div {
+  flex:1;
+}
+.topics-card i {
+  font-size:4rem;
+}
+.topics-card p {
+  font-size:1.5rem;
+}
+
+.topics-card .text{
+align-items: center;
+display: flex;
 }
