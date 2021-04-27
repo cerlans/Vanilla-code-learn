@@ -24,10 +24,17 @@ import {about, home, login, topics} from './Views.js'
 })()
 
 firebase.auth().onAuthStateChanged(function(user) {
+  const signOutButton= document.getElementById('logOut')
+  const logInButton = document.getElementById('logIn')
+
   if (user) {
    console.log(user)
+   signOutButton.style.display='block'
+   logInButton.style.display='none'
   } else {
     // No user is signed in.
+    signOutButton.style.display='none'
+    logInButton.style.display='block'
   }
 });
 
