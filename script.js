@@ -23,19 +23,22 @@ import {about, home, login, topics,results} from './Views.js'
     gapi.load("client", loadClient);
     
 })()
-
+// sets conditional styles if user is logged in or logged out
 firebase.auth().onAuthStateChanged(function(user) {
+  
   const signOutButton= document.getElementById('logOut')
   const logInButton = document.getElementById('logIn')
-
+  const savedCourses = document.getElementById('savedCourses')
   if (user) {
    console.log(user)
    signOutButton.style.display='block'
    logInButton.style.display='none'
+   savedCourses.style.display='block'
   } else {
     // No user is signed in.
     signOutButton.style.display='none'
     logInButton.style.display='block'
+    savedCourses.style.display='none'
   }
 });
 

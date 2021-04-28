@@ -33,8 +33,18 @@ button {
 	align-items: center;
 	;
 	text-align: center;
+  height:auto;
 }
-
+#informationView .photo{
+  margin-top:3rem
+}
+#informationView .sign-in {
+  padding:1rem;
+}
+.sign-in h1 {
+  font-size:1.5rem;
+  margin-bottom:2rem;
+}
 #sideBar {
 	background: #6c63ff;
 	display: block;
@@ -44,6 +54,8 @@ button {
 }
 #sideBar i {
   font-size:1.8rem;
+  height:100%;
+  width:100%;
 }
 #sideBar ul {
   color:white;
@@ -64,6 +76,9 @@ button {
 }
 .about p {
   padding:1rem;
+}
+.about h1 {
+  margin-left:1rem;
 }
 
 /* Topics pane*/
