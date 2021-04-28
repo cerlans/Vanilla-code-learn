@@ -1,5 +1,6 @@
 export let listTopics = `
 <div class='topics-cont'>
+<a href='#/Topics/HTML5'>
   <div class='topics-card'>
       <div classs='inner icon'>
       <i class="fab fa-html5"></i>
@@ -8,6 +9,8 @@ export let listTopics = `
       <p>HTML5</p>
       </div>
     </div>
+    </a>
+    <a href='#/Topics/CSS3'>
     <div class='topics-card'>
      <div classs='inner icon'>
       <i class="fab fa-css3-alt"></i>
@@ -16,6 +19,8 @@ export let listTopics = `
        <p>CSS3</p>
       </div>
     </div>
+    </a>
+    <a href='#/Topics/REACTJS'>
     <div class='topics-card'>
       <div classs='inner icon'>
         <i class="fab fa-react"></i>
@@ -24,6 +29,8 @@ export let listTopics = `
       <p>ReactJS</p>
       </div>
     </div>
+    </a>
+    <a href='#/Topics/VUEJS'>
     <div class='topics-card'>
      <div classs='inner icon'>
       <i class="fab fa-vuejs"></i>
@@ -32,6 +39,8 @@ export let listTopics = `
       <p>VueJS</p>
       </div>
     </div>
+    </a>
+    <a href='#/Topics/NODEJS'>
     <div class='topics-card'>
      <div classs='inner icon'>
       <i class="fab fa-node-js"></i>
@@ -40,6 +49,8 @@ export let listTopics = `
       <p>NodeJS</p>
       </div>
     </div>
+    </a>
+    <a href='#/Topics/PYTHON'>
     <div class='topics-card'>
       <div classs='inner icon'>
         <i class="fab fa-python"></i>
@@ -48,6 +59,7 @@ export let listTopics = `
       <p>Python</p>
       </div>
     </div>
+    </a>
 </div>
 `
 

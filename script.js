@@ -1,4 +1,4 @@
-import {about, home, login, topics} from './Views.js'
+import {about, home, login, topics,results} from './Views.js'
  const firebaseConfig = {
     apiKey: "AIzaSyCjSYyCaUAoeOhwa5xYNbxpJ668xLpRND0",
     authDomain: "restart-1ad32.firebaseapp.com",
@@ -21,6 +21,7 @@ import {about, home, login, topics} from './Views.js'
  
 (() => {
     gapi.load("client", loadClient);
+    
 })()
 
 firebase.auth().onAuthStateChanged(function(user) {
@@ -53,7 +54,9 @@ let routes = {
     '/': home,
     '/About': about,
     '/Topics': topics,
-    '/Login': login
+    '/Login': login,
+    '/Topics/:videoId' : results
+
 }
 
 const router = Router(routes);

@@ -1,6 +1,24 @@
 /* these shared view panes will replace the contents off .informationView class in the html whenever the route is changed */
 import {listTopics} from './List.js'
 
+ let execution = (hashSearchString)=> {
+    return gapi.client.youtube.search.list({
+      "part": [
+        "snippet"
+      ],
+      "maxResults": 10,
+      "q": hashSearchString,
+      "type": [
+        "video"
+      ],
+      "videoDuration": "medium"
+    })
+        .then(function(response) {
+                // Handle the results here (response.result has the parsed body).
+                console.log("Response", response.result);
+              },
+              function(err) { console.error("Execute error", err); });
+  }
 export let about =()=>{
   
     const view = document.getElementById('informationView')
@@ -53,6 +71,14 @@ export let topics =()=>{
   })
 }
 
+export let results = ()=>{
+      const hashSearchString = window.location.hash.slice(9);
+      console.log(hashSearchString)
+      execution(hashSearchString)
+      const view = document.getElementById('informationView')
+      let text = `<div>test</div>`
+      view.innerHTML = text
+}
 
 export let login = () => {
    let uiConfig = {
