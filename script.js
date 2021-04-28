@@ -23,6 +23,23 @@ import {about, home, login, topics,results} from './Views.js'
     gapi.load("client", loadClient);
     
 })()
+
+// routes for the components that are imported from .views.js
+let routes = {
+    '/': home,
+    '/About': about,
+    '/Topics': topics,
+    '/Login': login,
+    '/Topics/:videoId' : results
+}
+
+const router = Router(routes);
+
+router.init(['/'])
+
+
+
+
 // sets conditional styles if user is logged in or logged out
 firebase.auth().onAuthStateChanged(function(user) {
   
@@ -42,6 +59,8 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
+
+//event listener for logout button
 (function() {
 const signOutButton= document.getElementById('logOut')
 signOutButton.addEventListener('click',()=>{
@@ -53,14 +72,3 @@ signOutButton.addEventListener('click',()=>{
 })
 })()
 
-let routes = {
-    '/': home,
-    '/About': about,
-    '/Topics': topics,
-    '/Login': login,
-    '/Topics/:videoId' : results
-
-}
-
-const router = Router(routes);
-router.init(['/'])

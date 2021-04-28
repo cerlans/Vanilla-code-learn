@@ -7,15 +7,18 @@
 	box-sizing: border-box;
 	font-family: 'Poppins', sans-serif;
 }
+
 a {
-  text-decoration:none;
-  color:inherit;
+	text-decoration: none;
+	color: inherit;
 }
+
 img {
 	width: 100%;
 }
+
 ul {
-  list-style-type:none;
+	list-style-type: none;
 }
 
 button {
@@ -24,27 +27,32 @@ button {
 	background: #6c63ff;
 	border-radius: 1rem;
 	color: white;
-  cursor:pointer;
+	cursor: pointer;
 }
 
 #informationView {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	;
 	text-align: center;
-  height:auto;
+	height: auto;
+  padding:1.5rem;
+  margin-bottom:3rem;
 }
-#informationView .photo{
-  margin-top:3rem
+
+#informationView .photo {
+	margin-top: 3rem
 }
+
 #informationView .sign-in {
-  padding:1rem;
+	padding: 1rem;
 }
+
 .sign-in h1 {
-  font-size:1.5rem;
-  margin-bottom:2rem;
+	font-size: 1.5rem;
+	margin-bottom: 2rem;
 }
+
 #sideBar {
 	background: #6c63ff;
 	display: block;
@@ -52,62 +60,96 @@ button {
 	width: 100%;
 	position: fixed;
 }
+
 #sideBar i {
-  font-size:1.8rem;
-  height:100%;
-  width:100%;
-}
-#sideBar ul {
-  color:white;
-  display:flex;
-  justify-content: center;
-  text-align:center;
-  padding:1rem;
-}
-#sideBar ul li {
- flex:1;
- cursor:pointer;
+	font-size: 1.8rem;
+	height: 100%;
+	width: 100%;
 }
 
+#sideBar ul {
+	color: white;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	padding: 1rem;
+}
+
+#sideBar ul li {
+	flex: 1;
+	cursor: pointer;
+}
+
+
 /* About pane */
+
 .about {
-  text-align:left !important;
-  padding:1rem;
+	text-align: left !important;
+	padding: 1rem;
 }
+
 .about p {
-  padding:1rem;
+	padding: 1rem;
 }
+
 .about h1 {
-  margin-left:1rem;
+	margin-left: 1rem;
 }
+
 
 /* Topics pane*/
 
 .topics-cont {
-  width:100%;
-  padding:2rem;
-  margin-bottom:3rem;
-  text-transform:uppercase;
-}
-.topics-card {
-  border:1px solid black;
-  display:flex;
-  cursor:pointer;
-  padding:1rem;
-  margin-bottom:1rem;
-  width:100%;
-}
-.topics-card div {
-  flex:1;
-}
-.topics-card i {
-  font-size:4rem;
-}
-.topics-card p {
-  font-size:1.5rem;
+	width: 100%;
+	padding: 2rem;
+	margin-bottom: 3rem;
+	text-transform: uppercase;
 }
 
-.topics-card .text{
-align-items: center;
-display: flex;
+.topics-card {
+	border: 1px solid black;
+	display: flex;
+	cursor: pointer;
+	padding: 1rem;
+	margin-bottom: 1rem;
+	width: 100%;
+}
+
+.topics-card div {
+	flex: 1;
+}
+
+.topics-card i {
+	font-size: 4rem;
+}
+
+.topics-card p {
+	font-size: 1.5rem;
+}
+
+.topics-card .text {
+	align-items: center;
+	display: flex;
+}
+
+
+/* after the user selects a topic off video to search, these are the result stylings */
+
+.video {
+	display: flex;
+	margin-bottom:2rem;
+  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  cursor:pointer;
+}
+
+.video div {
+	flex: 1;
+}
+
+.video .videoTitle {
+text-align:left;
+}
+.video .videoTitle span {
+  padding:1rem;
 }

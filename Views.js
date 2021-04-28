@@ -1,7 +1,7 @@
 /* these shared view panes will replace the contents off .informationView class in the html whenever the route is changed */
 import {listTopics} from './List.js'
 
- let execution = (hashSearchString)=> {
+ let execution = (hashSearchString,view)=> {
     return gapi.client.youtube.search.list({
       "part": [
         "snippet"
@@ -15,10 +15,25 @@ import {listTopics} from './List.js'
     })
         .then(function(response) {
                 // Handle the results here (response.result has the parsed body).
-                console.log("Response", response.result);
+                let videoResults = response.result.items.map((value)=>{
+                  return (`
+                      <div class='video'>
+                        <div class='thumbnail'>
+                          <img src=${value.snippet.thumbnails.medium.url} alt='a youtube video'>
+                        </div>
+                        <div class='videoTitle'>
+                        <p>${value.snippet.title}</p>
+                        <h4> ${value.snippet.channelTitle}</h4>
+                        </div>
+                      </div>
+                  `)
+                 
+                }).join('')
+                 view.innerHTML = videoResults
               },
               function(err) { console.error("Execute error", err); });
   }
+  // about page in the router
 export let about =()=>{
   
     const view = document.getElementById('informationView')
@@ -34,7 +49,7 @@ export let about =()=>{
 
 }
 
-
+//home page in the router
 export let home = () =>{
   firebase.auth().onAuthStateChanged(function(user) {
       const view = document.getElementById('informationView')
@@ -55,7 +70,7 @@ export let home = () =>{
 });
 
 }
-
+//topics page in the router
 export let topics =()=>{
   firebase.auth().onAuthStateChanged(function(user) {
         const view = document.getElementById('informationView')
@@ -73,11 +88,8 @@ export let topics =()=>{
 
 export let results = ()=>{
       const hashSearchString = window.location.hash.slice(9);
-      console.log(hashSearchString)
-      execution(hashSearchString)
       const view = document.getElementById('informationView')
-      let text = `<div>test</div>`
-      view.innerHTML = text
+      execution(hashSearchString,view)
 }
 
 export let login = () => {
