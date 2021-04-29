@@ -11,6 +11,9 @@ import {about, home, login, topics,results} from './Views.js'
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
+  //cloud firestore
+  let db = firebase.firestore();
+
  /* youtube v3 data API loading */
  const loadClient =() => {
    gapi.client.setApiKey("AIzaSyCFiBdff1JxkTe4F_0auryiuqiYMIJd48g");
@@ -24,7 +27,7 @@ import {about, home, login, topics,results} from './Views.js'
     
 })()
 
-// routes for the components that are imported from .views.js
+// routes for the components that are imported from .Views.js
 let routes = {
     '/': home,
     '/About': about,
@@ -47,7 +50,14 @@ firebase.auth().onAuthStateChanged(function(user) {
   const logInButton = document.getElementById('logIn')
   const savedCourses = document.getElementById('savedCourses')
   if (user) {
-   console.log(user)
+    //adds the userid and additional information to the firestore database
+    // if a returning user re-logs in this function runs but doesn't add anything to firestore DB
+    db.collection("Users").doc(user.uid).set({
+          userName: user.displayName,
+          anonymousLogin: user.isAnonymous,
+          userId: user.uid,
+          email: user.email,
+        });
    signOutButton.style.display='block'
    logInButton.style.display='none'
    savedCourses.style.display='block'
