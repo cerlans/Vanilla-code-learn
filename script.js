@@ -1,4 +1,5 @@
-import {about, home, login, topics,results} from './Views.js'
+import {about, home, topics,results} from './Views.js'
+import {login} from './Login.js'
  const firebaseConfig = {
     apiKey: "AIzaSyCjSYyCaUAoeOhwa5xYNbxpJ668xLpRND0",
     authDomain: "restart-1ad32.firebaseapp.com",

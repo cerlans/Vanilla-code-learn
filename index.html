@@ -1,3 +1,5 @@
+
+
 <html>
    <head>
       <meta charset="UTF-8">
@@ -9,45 +11,50 @@
       <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
       <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
       <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
-         <!--Cloud firestore-->
+      <!--Cloud firestore-->
       <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-firestore.js"></script>
       <!--flatiron director router-->
       <script
-      src="https://rawgit.com/flatiron/director/master/build/director.min.js"></script>
+         src="https://rawgit.com/flatiron/director/master/build/director.min.js"></script>
       <!--Youtube v3 data API-->
       <script  src="https://apis.google.com/js/api.js?onload=handleClientLoad" ></script>
-   
    </head>
    <body>
       <div id='masterParent'>
          <!--This view will be interchangable with the route that is currently loaded-->
          <div id="informationView">
-           
          </div>
          <div id ='sideBar'>
             <ul>
                <li>
-                  <a href='#/'><i class="fas fa-home"></a></i>
+                  <a href='#/'><i class="fas fa-home"></i>
+                  <span>Home</span>
+                  </a>
                </li>
                <li>
                   <a href='#/About'>
-                  <i class="far fa-address-card"></i></a>
+                  <i class="far fa-address-card"></i>
+                  <span>About</span>
+                  </a>
                </li>
                <li>
-                 <a href='#/Topics'>
+                  <a href='#/Topics'>
                   <i class="fas fa-book-open"></i>
+                  <span>Topics</span>
                   </a>
                </li>
                <li id='savedCourses'>
                   <i class="fas fa-bookmark"></i>
+                  <span>Saved Courses</span>
                </li>
                <li id='logIn'>
                   <a href='#/Login'>
                   <i class="fas fa-users"></i>
+                  <span>Login</span>
                   </a>
                </li>
                <li id='logOut'>
-                <i class="fas fa-sign-out-alt"></i>
+                  <i class="fas fa-sign-out-alt"></i>
                </li>
             </ul>
          </div>
@@ -55,5 +62,4 @@
       <script type='module' src="script.js"></script>
    </body>
 </html>
-
 
