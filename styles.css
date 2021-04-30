@@ -21,6 +21,7 @@ ul {
 	list-style-type: none;
 }
 
+
 button {
 	all: unset;
 	padding: 15px 32px;
@@ -79,7 +80,9 @@ button {
 	flex: 1;
 	cursor: pointer;
 }
-
+#sideBar span {
+  display:none;
+}
 
 /* About pane */
 
