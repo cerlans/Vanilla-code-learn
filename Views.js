@@ -114,11 +114,12 @@ export let results = ()=>{
 }
 
 export let random = ()=>{
+  // takes the url and splits it at each hyphen
   const videoPath = window.location.hash.split('/')
-  const videoId = videoPath[3]
-  console.log(videoPath)
+  //sets the third part off the url, which will always be the video id
+  const videoId = videoPath[3];
   const view = document.getElementById('informationView')
-  let text = `<iframe id="player" type="text/html" width="640" height="390"
+  let text = `<iframe id="player" type="text/html"
   src="http://www.youtube.com/embed/${videoId}"
   frameborder="0"></iframe>`
   
