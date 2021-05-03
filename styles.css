@@ -159,7 +159,8 @@ text-align:left;
 
 
 /* LOADER SPINNER CLASS */
-.loader {
+
+.loader {	
   border: 16px solid #f3f3f3; /* Light grey */
   border-top: 16px solid #6c63ff;; 
   border-radius: 50%;

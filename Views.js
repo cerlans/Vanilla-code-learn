@@ -3,7 +3,7 @@ import {listTopics} from './List.js'
 
 
 //youtube api function returns 10 search results relating to user query
- let execution = (hashSearchString,view,loader)=> {
+ let execution = (hashSearchString,view,)=> {
     return gapi.client.youtube.search.list({
       "part": [
         "snippet"
@@ -18,7 +18,9 @@ import {listTopics} from './List.js'
         .then(function(response) {
                 // Handle the results here (response.result has the parsed body).
                 let videoResults = response.result.items.map((value)=>{
+                  
                   return (`
+                  <a href='#/Topics/${hashSearchString}/${value.id.videoId}'>
                       <div class='video'>
                         <div class='thumbnail'>
                           <img src=${value.snippet.thumbnails.medium.url} alt='a youtube video'>
@@ -28,10 +30,11 @@ import {listTopics} from './List.js'
                         <h4> ${value.snippet.channelTitle}</h4>
                         </div>
                       </div>
+                    </a>
                   `)
                  
                 }).join('')
-                loader = false
+              
                  view.innerHTML = videoResults
               },
               function(err) { console.error("Execute error", err); });
@@ -101,9 +104,23 @@ export let results = ()=>{
       const view = document.getElementById('informationView')
       let isLoading = true
       if(isLoading) {
-        view.innerHTML =  `<div class="loader"></div> `
+        view.innerHTML =  `
+        <div class='align'>
+        <div class="loader"></div>
+        </div> `
       }
       const hashSearchString = window.location.hash.slice(9);
       execution(hashSearchString,view,isLoading)
 }
 
+export let random = ()=>{
+  const videoPath = window.location.hash.split('/')
+  const videoId = videoPath[3]
+  console.log(videoPath)
+  const view = document.getElementById('informationView')
+  let text = `<iframe id="player" type="text/html" width="640" height="390"
+  src="http://www.youtube.com/embed/${videoId}"
+  frameborder="0"></iframe>`
+  
+  view.innerHTML = text
+}

@@ -1,4 +1,4 @@
-import {about, home, topics,results} from './Views.js'
+import {about, home, topics,results,random} from './Views.js'
 import {login} from './Login.js'
  const firebaseConfig = {
     apiKey: "AIzaSyCjSYyCaUAoeOhwa5xYNbxpJ668xLpRND0",
@@ -33,8 +33,9 @@ let routes = {
     '/': home,
     '/About': about,
     '/Topics': topics,
+    '/Topics/:topicsId' : results,
+    '/Topics/:topicsId/:youtubeId' : random,
     '/Login': login,
-    '/Topics/:videoId' : results
 }
 
 const router = Router(routes);
