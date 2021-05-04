@@ -39,6 +39,23 @@ import {listTopics} from './List.js'
               },
               function(err) { console.error("Execute error", err); });
   }
+
+  let singleVideoExecution = (videoParam)=>{
+     return gapi.client.youtube.videos
+      .list({
+        part: ["snippet,contentDetails,statistics"],
+        id: videoParam,
+      })
+      .then(
+        function (response) {
+          // Handle the results here (response.result has the parsed body).
+          console.log(response)
+        },
+        function (err) {
+          console.error("Execute error", err);
+        }
+      );
+  }
   // about page in the router
 export let about =()=>{
   
@@ -82,7 +99,6 @@ export let home = () =>{
             `
     view.innerHTML = verify
 });
-
 }
 //topics page in the router
 export let topics =()=>{
@@ -114,10 +130,11 @@ export let results = ()=>{
 }
 
 export let random = ()=>{
-  // takes the url and splits it at each hyphen
-  const videoPath = window.location.hash.split('/')
+   const videoPath = window.location.hash.split('/')
   //sets the third part off the url, which will always be the video id
   const videoId = videoPath[3];
+  singleVideoExecution(videoId)
+ 
   const view = document.getElementById('informationView')
   let text = `<iframe id="player" type="text/html"
   src="http://www.youtube.com/embed/${videoId}"
