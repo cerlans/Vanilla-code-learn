@@ -40,7 +40,7 @@ import {listTopics} from './List.js'
               function(err) { console.error("Execute error", err); });
   }
 
-  let singleVideoExecution = (videoParam)=>{
+  let singleVideoExecution = (videoParam,innerView)=>{
      return gapi.client.youtube.videos
       .list({
         part: ["snippet,contentDetails,statistics"],
@@ -49,7 +49,7 @@ import {listTopics} from './List.js'
       .then(
         function (response) {
           // Handle the results here (response.result has the parsed body).
-          console.log(response)
+         console.log(response.result.items[0].snippet)
         },
         function (err) {
           console.error("Execute error", err);
@@ -130,15 +130,16 @@ export let results = ()=>{
 }
 
 export let random = ()=>{
-   const videoPath = window.location.hash.split('/')
+  const view = document.getElementById('informationView')
+  const videoPath = window.location.hash.split('/')
   //sets the third part off the url, which will always be the video id
   const videoId = videoPath[3];
   singleVideoExecution(videoId)
- 
-  const view = document.getElementById('informationView')
-  let text = `<iframe id="player" type="text/html"
-  src="http://www.youtube.com/embed/${videoId}"
-  frameborder="0"></iframe>`
-  
-  view.innerHTML = text
 }
+
+/* 
+    <iframe id="player" type="text/html"
+    src="http://www.youtube.com/embed/${videoId}"
+    frameborder="0">
+    </iframe>
+*/
