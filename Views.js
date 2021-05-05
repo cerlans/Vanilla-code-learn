@@ -39,7 +39,11 @@ import {listTopics} from './List.js'
               },
               function(err) { console.error("Execute error", err); });
   }
-
+  //verifies whether user is logged or not and returns conditional text
+  const verify = (user,text,text2) =>{
+    return ( user ? `<p>${text}</p>`:`<a href='#/Login'><p>${text2}</p></a>`)
+  }
+  // i could make this agnostic by param overload
   let singleVideoExecution = (videoParam,innerView)=>{
      return gapi.client.youtube.videos
       .list({
@@ -48,15 +52,8 @@ import {listTopics} from './List.js'
       })
       .then(
         function (response) {
-         let x = firebase.auth().onAuthStateChanged(function(user) {
-             if(user){
-               return `<div><p>This is a test</p></div>`
-             }
-             else {
-               return `<div><p>This is a test</p></div>`
-             }
-           })
-           console.log(x())
+         let loggedIn =  firebase.auth().currentUser;
+        
          let video = response.result.items[0].snippet
         
          console.log(video.description)
@@ -69,8 +66,8 @@ import {listTopics} from './List.js'
             src="http://www.youtube.com/embed/${videoParam}"
             frameborder="0">
           </iframe>
-          <p>${video.description}</p>
-          ${x()}
+          <p>${video.description.replaceAll('\n', '<br>')}</p>
+          ${verify(loggedIn,'Add Course','Sign in to save Courses')}
         </div>
       `
       innerView.innerHTML = text
@@ -125,26 +122,21 @@ export let home = () =>{
     view.innerHTML = verify
 });
 }
+
 //topics page in the router
 export let topics =()=>{
   firebase.auth().onAuthStateChanged(function(user) {
         const view = document.getElementById('informationView')
         // in reality all i really need to change here is the span, but im re-writing the entire html tree
-          let verify = user ? (`<div class='topicsHeading'> 
-                                <h1>What do you want to learn?</h1>
-                                <p>You are signed in</p>
-                                </div>
-                                ${listTopics}
-          `): (` 
-                <div class='topicsHeading'> 
-                <h1 >What do you want to learn?</h1>
-                <a href='#/Login'>
-                <p >Sign up for an account to add tutorials to your subscriptions and take notes!</p>
-                </a>
-                </div>
-                ${listTopics}
-          `)
-          view.innerHTML = verify
+        let text = `
+                 <div class='topicsHeading'>
+                  <h1>What do you want to learn?</h1>
+                   ${verify(user,'You are signed in', 'You must be signed in to save courses')}
+                 </div>
+                 ${listTopics}
+        `
+          view.innerHTML = text
+          
   })
 }
 
@@ -161,7 +153,7 @@ export let results = ()=>{
       execution(hashSearchString,view,isLoading)
 }
 
-export let random = ()=>{
+export let videoPlayer = ()=>{
   const view = document.getElementById('informationView')
   const videoPath = window.location.hash.split('/')
   //sets the third part off the url, which will always be the video id
@@ -169,9 +161,3 @@ export let random = ()=>{
   singleVideoExecution(videoId,view)
 }
 
-/* 
-    <iframe id="player" type="text/html"
-    src="http://www.youtube.com/embed/${videoId}"
-    frameborder="0">
-    </iframe>
-*/
