@@ -48,6 +48,15 @@ import {listTopics} from './List.js'
       })
       .then(
         function (response) {
+         let x = firebase.auth().onAuthStateChanged(function(user) {
+             if(user){
+               return `<div><p>This is a test</p></div>`
+             }
+             else {
+               return `<div><p>This is a test</p></div>`
+             }
+           })
+           console.log(x())
          let video = response.result.items[0].snippet
         
          console.log(video.description)
@@ -61,6 +70,7 @@ import {listTopics} from './List.js'
             frameborder="0">
           </iframe>
           <p>${video.description}</p>
+          ${x()}
         </div>
       `
       innerView.innerHTML = text
