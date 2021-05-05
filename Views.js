@@ -48,8 +48,23 @@ import {listTopics} from './List.js'
       })
       .then(
         function (response) {
-          // Handle the results here (response.result has the parsed body).
-         console.log(response.result.items[0].snippet)
+         let video = response.result.items[0].snippet
+        
+         
+         let text = `<div id = 'videoPlayer'>
+        <div class='videoTitle'>
+          <h1>${video.title}</h1>
+          <p>${video.channelTitle}</p>	
+        </div>
+          <iframe id="player" type="text/html"
+            src="http://www.youtube.com/embed/${videoParam}"
+            frameborder="0">
+          </iframe>
+          <p>${video.description}</p>
+        </div>
+      `
+      innerView.innerHTML = text
+    
         },
         function (err) {
           console.error("Execute error", err);
@@ -141,7 +156,7 @@ export let random = ()=>{
   const videoPath = window.location.hash.split('/')
   //sets the third part off the url, which will always be the video id
   const videoId = videoPath[3];
-  singleVideoExecution(videoId)
+  singleVideoExecution(videoId,view)
 }
 
 /* 

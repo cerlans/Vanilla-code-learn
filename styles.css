@@ -160,6 +160,10 @@ button {
 	padding: 1rem;
 }
 
+/* after the user selects a video from the above returned results, this will be the video player stylings */
+#videoPlayer{
+  width:100%;
+}
 
 /* LOADER SPINNER CLASS */
 
