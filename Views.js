@@ -50,7 +50,7 @@ import {listTopics} from './List.js'
         function (response) {
          let video = response.result.items[0].snippet
         
-         
+         console.log(video.description)
          let text = `<div id = 'videoPlayer'>
         <div class='videoTitle'>
           <h1>${video.title}</h1>
