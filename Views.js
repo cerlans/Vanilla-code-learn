@@ -105,11 +105,18 @@ export let topics =()=>{
   firebase.auth().onAuthStateChanged(function(user) {
         const view = document.getElementById('informationView')
         // in reality all i really need to change here is the span, but im re-writing the entire html tree
-          let verify = user ? (` <h1>What do you want to learn?</h1>
+          let verify = user ? (`<div class='topicsHeading'> 
+                                <h1>What do you want to learn?</h1>
                                 <p>You are signed in</p>
+                                </div>
                                 ${listTopics}
-          `): (` <h1>What do you want to learn?</h1>
-                <p>Sign up for an account to add tutorials to your subscriptions and take notes!</p>
+          `): (` 
+                <div class='topicsHeading'> 
+                <h1 >What do you want to learn?</h1>
+                <a href='#/Login'>
+                <p >Sign up for an account to add tutorials to your subscriptions and take notes!</p>
+                </a>
+                </div>
                 ${listTopics}
           `)
           view.innerHTML = verify
