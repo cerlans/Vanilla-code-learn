@@ -1,7 +1,5 @@
 /* these shared view panes will replace the contents off .informationView class in the html whenever the route is changed */
 import {listTopics} from './List.js'
-
-
 //youtube api function returns 10 search results relating to user query
  let execution = (hashSearchString,view,)=> {
     return gapi.client.youtube.search.list({
@@ -20,6 +18,7 @@ import {listTopics} from './List.js'
                 let videoResults = response.result.items.map((value)=>{
                   
                   return (`
+                
                   <a href='#/Topics/${hashSearchString}/${value.id.videoId}'>
                       <div class='video'>
                         <div class='thumbnail'>
@@ -31,6 +30,7 @@ import {listTopics} from './List.js'
                         </div>
                       </div>
                     </a>
+                   
                   `)
                  
                 }).join('')
@@ -41,7 +41,7 @@ import {listTopics} from './List.js'
   }
   //verifies whether user is logged or not and returns conditional text
   const verify = (user,text,text2) =>{
-    return ( user ? `<p>${text}</p>`:`<a href='#/Login'><p>${text2}</p></a>`)
+    return ( user ? `<div id='trueButton'>${text}</div>`:`<a href='#/Login'><div id='falseButton'>${text2}</div></a>`)
   }
   // i could make this agnostic by param overload
   let singleVideoExecution = (videoParam,innerView)=>{
@@ -66,8 +66,8 @@ import {listTopics} from './List.js'
             src="http://www.youtube.com/embed/${videoParam}"
             frameborder="0">
           </iframe>
-          <p>${video.description.replaceAll('\n', '<br>')}</p>
           ${verify(loggedIn,'Add Course','Sign in to save Courses')}
+          <p>${video.description.replaceAll('\n', '<br>')}</p>
         </div>
       `
       innerView.innerHTML = text
@@ -152,7 +152,24 @@ export let results = ()=>{
       const hashSearchString = window.location.hash.slice(9);
       execution(hashSearchString,view,isLoading)
 }
-
+function teet(){
+  db.collection(`Users/${userId}/SavedVideos`)
+                      .add({
+                        channelTitle: video.channelTitle,
+                        videoTitle: video.title,
+                        videoDescription: video.description,
+                        videoId: id,
+                        videoThumbnail: video.thumbnails.medium.url,
+                      })
+                      .then(() => {
+                        console.log("Document successfully written!");
+                        setButtonText("Course Added!");
+                        toggleClass("courseAddedButton");
+                      })
+                      .catch((error) => {
+                        console.error("Error writing document: ", error);
+                      });
+}
 export let videoPlayer = ()=>{
   const view = document.getElementById('informationView')
   const videoPath = window.location.hash.split('/')
@@ -161,3 +178,7 @@ export let videoPlayer = ()=>{
   singleVideoExecution(videoId,view)
 }
 
+export let savedCourses = () => {
+    const view = document.getElementById('informationView')
+    view.innerHTML = 'Saved Courses will go here'
+}

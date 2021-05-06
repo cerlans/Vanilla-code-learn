@@ -9,7 +9,7 @@
 a {
 	text-decoration: none;
 	color: inherit;
-  width:100%;
+  
 }
 
 img {
@@ -164,6 +164,28 @@ button {
 /* after the user selects a video from the above returned results, this will be the video player stylings */
 #videoPlayer{
   width:100%;
+  text-align: left;
+}
+
+#videoPlayer #falseButton {
+  color:blue;
+  text-decoration: underline;
+  margin-bottom:1rem;
+  margin-top:1rem;
+}
+#videoPlayer #trueButton {
+  background-color: #6c63ff;
+  border: none;
+  border-radius:0.5rem;
+  color: white;
+  cursor:pointer;
+  display:inline-block;
+  padding: 15px 32px;
+  text-align: left;
+  text-decoration: none;
+  margin-top:1rem;
+  margin-bottom:1rem;
+  font-size: 16px;
 }
 
 /* LOADER SPINNER CLASS */
@@ -220,7 +242,7 @@ button {
 @media (min-width:1025px) {
 	body {
 		background: #6c63ff;
-		padding: 10px;
+		padding: 1rem;
 	}
 	#masterParent {
 		display: flex;
@@ -280,5 +302,19 @@ button {
 		text-transform: uppercase;
 		margin-bottom: 20px;
 	}
+  #sideBar span {
+    display:block;
+  }
+  
+
+  /* */
+  #informationView {
+   flex-direction: row;
+   flex-wrap:wrap;
+  }
+  .video {
+    display:block;
+    width:200px;
+  }
 }
 

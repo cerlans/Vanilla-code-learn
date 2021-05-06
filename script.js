@@ -1,4 +1,4 @@
-import {about, home, topics,results,videoPlayer} from './Views.js'
+import {about, home, topics,results,videoPlayer,savedCourses} from './Views.js'
 import {login} from './Login.js'
  const firebaseConfig = {
     apiKey: "AIzaSyCjSYyCaUAoeOhwa5xYNbxpJ668xLpRND0",
@@ -11,6 +11,7 @@ import {login} from './Login.js'
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+console.log(firebase.app())
 
   //cloud firestore
   let db = firebase.firestore();
@@ -36,6 +37,7 @@ let routes = {
     '/Topics/:topicsId' : results,
     '/Topics/:topicsId/:youtubeId' : videoPlayer,
     '/Login': login,
+    '/savedCourses':savedCourses
 }
 
 const router = Router(routes);
@@ -47,7 +49,11 @@ router.init(['/'])
 
 // sets conditional styles if user is logged in or logged out
 firebase.auth().onAuthStateChanged(function(user) {
-  
+  /*
+  db.collection("Users").get().then(function(querySnapshot) {      
+    console.log(querySnapshot.size); 
+});
+*/
   const signOutButton= document.getElementById('logOut')
   const logInButton = document.getElementById('logIn')
   const savedCourses = document.getElementById('savedCourses')
@@ -60,6 +66,7 @@ firebase.auth().onAuthStateChanged(function(user) {
           userId: user.uid,
           email: user.email,
         });
+
    signOutButton.style.display='block'
    logInButton.style.display='none'
    savedCourses.style.display='block'
