@@ -1,5 +1,11 @@
 /* these shared view panes will replace the contents off .informationView class in the html whenever the route is changed */
 import {listTopics} from './List.js'
+ import {fireBase} from './fireBase.js'
+
+
+  let db = firebase.firestore();
+  console.log(db)
+
 //youtube api function returns 10 search results relating to user query
  let execution = (hashSearchString,view,)=> {
     return gapi.client.youtube.search.list({
@@ -67,6 +73,7 @@ import {listTopics} from './List.js'
               frameborder="0">
               </iframe>
              ${verify(loggedIn,'Add Course','Sign in to save Courses')}
+             ${addVideo()}
             </div>
             <div class='videoDescription'>
             <p>${video.description.replaceAll('\n', '<br>')}</p>
