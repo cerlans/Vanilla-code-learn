@@ -30,7 +30,7 @@ import {listTopics} from './List.js'
                         </div>
                       </div>
                     </a>
-                   
+                    </div>
                   `)
                  
                 }).join('')
@@ -57,18 +57,21 @@ import {listTopics} from './List.js'
          let video = response.result.items[0].snippet
         
          console.log(video.description)
-         let text = `<div id = 'videoPlayer'>
-        <div class='videoTitle'>
-          <h1>${video.title}</h1>
-          <p>${video.channelTitle}</p>	
-        </div>
-          <iframe id="player" type="text/html"
-            src="http://www.youtube.com/embed/${videoParam}"
-            frameborder="0">
-          </iframe>
-          ${verify(loggedIn,'Add Course','Sign in to save Courses')}
-          <p>${video.description.replaceAll('\n', '<br>')}</p>
-        </div>
+         let text = `
+         <div id = 'videoPlayer'>	
+            <div class='iframePanel'>
+              <h1>${video.title}</h1>
+              <p>${video.channelTitle}</p>
+              <iframe id="player" type="text/html"
+              src="http://www.youtube.com/embed/${videoParam}"
+              frameborder="0">
+              </iframe>
+             ${verify(loggedIn,'Add Course','Sign in to save Courses')}
+            </div>
+            <div class='videoDescription'>
+            <p>${video.description.replaceAll('\n', '<br>')}</p>
+            </div>
+         </div>
       `
       innerView.innerHTML = text
     
@@ -78,6 +81,7 @@ import {listTopics} from './List.js'
         }
       );
   }
+  
   // about page in the router
 export let about =()=>{
   
@@ -94,9 +98,17 @@ export let about =()=>{
 
 }
 
+let verifyAnon = (anon,standard) =>{
+return (anon ?` <h1>Anonymous user detected</h1>
+	     <p>any saved courses/data will be lost upon signing out or refreshing the page</p>`
+	: `<h1>Welcome ${standard.displayName}</h1>
+   <p>Your data will be saved</p>`)
+}
+
 //home page in the router
 export let home = () =>{
   firebase.auth().onAuthStateChanged(function(user) {
+    // i have to verify against the user being anonymous as -well, anon users can't save there progress and must be warned
       const view = document.getElementById('informationView')
       let verify = user ? `
             <div class='parent'>
@@ -104,8 +116,7 @@ export let home = () =>{
                     <img src='https://i.vgy.me/sTK7Wi.png'>
                   </div>
                   <div class='sign-in'>
-                    <h1> welcome ${user.displayName}</h1>
-                    <p>Your data will be saved</p>
+                   ${verifyAnon(user.isAnonymous,user)}
                   </div>
             </div>
             `:`
@@ -129,11 +140,13 @@ export let topics =()=>{
         const view = document.getElementById('informationView')
         // in reality all i really need to change here is the span, but im re-writing the entire html tree
         let text = `
+            <div class='topicsMaster'>
                  <div class='topicsHeading'>
                   <h1>What do you want to learn?</h1>
                    ${verify(user,'You are signed in', 'You must be signed in to save courses')}
                  </div>
                  ${listTopics}
+            </div>
         `
           view.innerHTML = text
           
@@ -152,7 +165,8 @@ export let results = ()=>{
       const hashSearchString = window.location.hash.slice(9);
       execution(hashSearchString,view,isLoading)
 }
-function teet(){
+//adds video to the users collection
+function addVideo(){
   db.collection(`Users/${userId}/SavedVideos`)
                       .add({
                         channelTitle: video.channelTitle,
@@ -180,5 +194,7 @@ export let videoPlayer = ()=>{
 
 export let savedCourses = () => {
     const view = document.getElementById('informationView')
+    firebase.auth().onAuthStateChanged((user)=>{
+    })
     view.innerHTML = 'Saved Courses will go here'
 }

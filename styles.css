@@ -306,15 +306,33 @@ button {
     display:block;
   }
   
-
+  .topicsMaster {
+    width:100%;
+  }
   /* */
   #informationView {
    flex-direction: row;
    flex-wrap:wrap;
+   justify-content:space-between;
+   overflow:auto !important;
   }
   .video {
     display:block;
     width:200px;
   }
+
+#videoPlayer {
+display:flex;
+}
+#videoPlayer #player {
+  height:400px;
+}
+#videoPlayer div {
+flex:1;
+}
+#videoPlayer div:nth-child(2){
+  padding:2rem;
+}
+
 }
 
