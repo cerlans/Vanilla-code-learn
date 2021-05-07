@@ -79,4 +79,12 @@ signOutButton.addEventListener('click',()=>{
 });
 })
 })()
-
+//testing,remove later
+let sideBar = document.getElementById('sideBar');
+console.log(sideBar)
+sideBar.addEventListener('click',(event)=>{
+  if (event.target.className === 'nav'){
+     event.target.classList.add('nav-active');
+     console.log(event.target)
+  }
+})

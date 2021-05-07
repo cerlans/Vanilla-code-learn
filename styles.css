@@ -83,7 +83,9 @@ button {
 #sideBar span {
 	display: none;
 }
-
+.nav-active{
+  background:blue;
+}
 
 /* About pane */
 
