@@ -47,7 +47,7 @@ import {listTopics} from './List.js'
   }
   //verifies whether user is logged or not and returns conditional text
   const verify = (user,text,text2) =>{
-    return ( user ? `<div id='trueButton'>${text}</div>`:`<a href='#/Login'><div id='falseButton'>${text2}</div></a>`)
+    return ( user ? `<div id='trueButton'>${text}</div>`:`<a href='#/Login' style='text-align:center;'><div id='falseButton'>${text2}</div></a>`)
   }
  
   let singleVideoExecution = (videoParam,innerView)=>{

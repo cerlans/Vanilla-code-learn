@@ -1,3 +1,5 @@
+
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 * {
 	padding: 0px;
@@ -9,7 +11,6 @@
 a {
 	text-decoration: none;
 	color: inherit;
-  
 }
 
 img {
@@ -101,10 +102,12 @@ button {
 
 
 /* Topics pane*/
+
 .topicsHeading a {
-  text-decoration:underline ;
-  color:blue;
+	text-decoration: underline;
+	color: blue;
 }
+
 .topics-cont {
 	width: 100%;
 	padding: 2rem;
@@ -161,32 +164,36 @@ button {
 	padding: 1rem;
 }
 
+
 /* after the user selects a video from the above returned results, this will be the video player stylings */
-#videoPlayer{
-  width:100%;
-  text-align: left;
+
+#videoPlayer {
+	width: 100%;
+	text-align: left;
 }
 
 #videoPlayer #falseButton {
-  color:blue;
-  text-decoration: underline;
-  margin-bottom:1rem;
-  margin-top:1rem;
+	color: blue;
+	text-decoration: underline;
+	margin-bottom: 1rem;
+	margin-top: 1rem;
 }
+
 #videoPlayer #trueButton {
-  background-color: #6c63ff;
-  border: none;
-  border-radius:0.5rem;
-  color: white;
-  cursor:pointer;
-  display:inline-block;
-  padding: 15px 32px;
-  text-align: left;
-  text-decoration: none;
-  margin-top:1rem;
-  margin-bottom:1rem;
-  font-size: 16px;
+	background-color: #6c63ff;
+	border: none;
+	border-radius: 0.5rem;
+	color: white;
+	cursor: pointer;
+	display: inline-block;
+	padding: 15px 32px;
+	text-align: left;
+	text-decoration: none;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	font-size: 16px;
 }
+
 
 /* LOADER SPINNER CLASS */
 
@@ -302,37 +309,43 @@ button {
 		text-transform: uppercase;
 		margin-bottom: 20px;
 	}
-  #sideBar span {
-    display:block;
-  }
-  
-  .topicsMaster {
-    width:100%;
-  }
-  /* */
-  #informationView {
-   flex-direction: row;
-   flex-wrap:wrap;
-   justify-content:space-between;
-   overflow:auto !important;
-  }
-  .video {
-    display:block;
-    width:200px;
-  }
-
-#videoPlayer {
-display:flex;
-}
-#videoPlayer #player {
-  height:400px;
-}
-#videoPlayer div {
-flex:1;
-}
-#videoPlayer div:nth-child(2){
-  padding:2rem;
-}
-
+	#sideBar span {
+		display: block;
+	}
+	.topicsMaster {
+		width: 100%;
+	}
+	/* */
+	#informationView {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		overflow: auto !important;
+	}
+	.video {
+		display: block;
+		width: 200px;
+    margin:2rem;
+	}
+	#videoPlayer {
+		display: flex;
+		background: #dcdcdc;
+		border-radius: 0.5rem;
+		padding: 2rem;
+	}
+	#videoPlayer #player {
+		height: 400px;
+	}
+	#videoPlayer div {
+		flex: 1;
+	}
+	#videoPlayer div:nth-child(2) {
+		padding: 2rem;
+	}
+	.videoDescription {
+		background: #DCDCDC;
+		margin-left: 1rem;
+		padding: 1rem;
+	}
 }
 
