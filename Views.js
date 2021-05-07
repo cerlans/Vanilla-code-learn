@@ -200,4 +200,10 @@ export let savedCourses = () => {
     firebase.auth().onAuthStateChanged((user)=>{
     })
     view.innerHTML = 'Saved Courses will go here'
+    /*
+    db.collection("Users").get().then(function(querySnapshot) {      
+    console.log(querySnapshot.size); 
+});
+*/
+//will verify against the number of courses the user contains in his/her collection, boolean will be used to verify whether to display an empty page with an idicator to add course or show the collection off saved videos.
 }

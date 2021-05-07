@@ -80,6 +80,7 @@ signOutButton.addEventListener('click',()=>{
 })
 })()
 //testing,remove later
+/*
 let sideBar = document.getElementById('sideBar');
 console.log(sideBar)
 sideBar.addEventListener('click',(event)=>{
@@ -88,3 +89,4 @@ sideBar.addEventListener('click',(event)=>{
      console.log(event.target)
   }
 })
+*/
