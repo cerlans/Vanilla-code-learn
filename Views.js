@@ -49,7 +49,7 @@ import {listTopics} from './List.js'
   const verify = (user,text,text2) =>{
     return ( user ? `<div id='trueButton'>${text}</div>`:`<a href='#/Login'><div id='falseButton'>${text2}</div></a>`)
   }
-  // i could make this agnostic by param overload
+ 
   let singleVideoExecution = (videoParam,innerView)=>{
      return gapi.client.youtube.videos
       .list({
@@ -58,11 +58,8 @@ import {listTopics} from './List.js'
       })
       .then(
         function (response) {
-         let loggedIn =  firebase.auth().currentUser;
-        
+        firebase.auth().onAuthStateChanged(function(user) {
          let video = response.result.items[0].snippet
-        
-         console.log(video.description)
          let text = `
          <div id = 'videoPlayer'>	
             <div class='iframePanel'>
@@ -72,8 +69,7 @@ import {listTopics} from './List.js'
               src="http://www.youtube.com/embed/${videoParam}"
               frameborder="0">
               </iframe>
-             ${verify(loggedIn,'Add Course','Sign in to save Courses')}
-             ${addVideo()}
+             ${verify(user,'Add Course','Sign in to save Courses')}
             </div>
             <div class='videoDescription'>
             <p>${video.description.replaceAll('\n', '<br>')}</p>
@@ -81,7 +77,7 @@ import {listTopics} from './List.js'
          </div>
       `
       innerView.innerHTML = text
-    
+       })
         },
         function (err) {
           console.error("Execute error", err);
