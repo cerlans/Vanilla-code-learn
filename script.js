@@ -1,6 +1,6 @@
 import {about, home, topics,results,videoPlayer,savedCourses} from './Views.js'
 import {login} from './Login.js'
- import {fireBase} from './fireBase.js'
+import {fireBase} from './fireBase.js'
 
   //cloud firestore
   let db = firebase.firestore();
@@ -8,15 +8,27 @@ import {login} from './Login.js'
  /* youtube v3 data API loading */
  const loadClient =() => {
    gapi.client.setApiKey("AIzaSyCFiBdff1JxkTe4F_0auryiuqiYMIJd48g");
+   //why is this returned?
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
         .then(function() { console.log("GAPI client loaded for API"); },
               function(err) { console.error("Error loading GAPI client for API", err); });
  }
  
 (() => {
-    gapi.load("client", loadClient);
-    
+     gapiLoader()
 })()
+export function gapiLoader (){
+   const load = new Promise((resolve,reject)=>{
+          gapi.load("client",resolve);
+        })
+        load.then((data)=>{
+           gapi.client.setApiKey("AIzaSyCFiBdff1JxkTe4F_0auryiuqiYMIJd48g");
+          return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
+        }).then(()=>{
+          console.log('GAPI client loaded for API')
+          window.loadInstance = true
+          })
+}
 
 // routes for the components that are imported from .Views.js
 let routes = {

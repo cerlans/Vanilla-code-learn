@@ -1,7 +1,7 @@
 /* these shared view panes will replace the contents off .informationView class in the html whenever the route is changed */
 import {listTopics} from './List.js'
- import {fireBase} from './fireBase.js'
-
+import {fireBase} from './fireBase.js'
+import {gapiLoader} from './script.js'
 
   let db = firebase.firestore();
   console.log(db)
@@ -46,8 +46,8 @@ import {listTopics} from './List.js'
               function(err) { console.error("Execute error", err); });
   }
   //verifies whether user is logged or not and returns conditional text
-  const verify = (user,userToken,text,text2) =>{
-    return ( user ? `<div id='trueButton' onClick='${()=>{addVideo(userToken)}}'>${text}</div>`:`<a href='#/Login' style='text-align:center;'><div id='falseButton'>${text2}</div></a>`)
+  const verify = (user,text,text2) =>{
+    return ( user ? `<div id='trueButton'>${text}</div>`:`<a href='#/Login' style='text-align:center;'><div id='falseButton'>${text2}</div></a>`)
   }
  
   let singleVideoExecution = (videoParam,innerView)=>{
@@ -70,7 +70,7 @@ import {listTopics} from './List.js'
               src="http://www.youtube.com/embed/${videoParam}"
               frameborder="0">
               </iframe>
-             ${verify(user,user.uid,'Add Course','Sign in to save Courses')}
+             ${verify(user,'Add Course','Sign in to save Courses')}
             </div>
             <div class='videoDescription'>
             <p>${video.description.replaceAll('\n', '<br>')}</p>
@@ -157,8 +157,11 @@ export let topics =()=>{
   })
 }
 
-export let results = ()=>{
-      const view = document.getElementById('informationView')
+export let results =  ()=>{
+  /* if (!window.loadInstance) {
+      await gapiLoader();
+  }  */
+  const view = document.getElementById('informationView')
       let isLoading = true
       if(isLoading) {
         view.innerHTML =  `
@@ -167,8 +170,21 @@ export let results = ()=>{
         </div> `
       }
       const hashSearchString = window.location.hash.slice(9);
-      execution(hashSearchString,view,isLoading)
+       execution(hashSearchString,view,isLoading)
 }
+
+/* 
+ const view = document.getElementById('informationView')
+      let isLoading = true
+      if(isLoading) {
+        view.innerHTML =  `
+        <div class='align'>
+        <div class="loader"></div>
+        </div> `
+      }
+      const hashSearchString = window.location.hash.slice(9);
+       execution(hashSearchString,view,isLoading)
+*/
 //adds video to the users collection
 //userId param is only fillable with firebase Auth
 function addVideo(userToken){
