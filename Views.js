@@ -46,8 +46,8 @@ import {listTopics} from './List.js'
               function(err) { console.error("Execute error", err); });
   }
   //verifies whether user is logged or not and returns conditional text
-  const verify = (user,text,text2) =>{
-    return ( user ? `<div id='trueButton'>${text}</div>`:`<a href='#/Login' style='text-align:center;'><div id='falseButton'>${text2}</div></a>`)
+  const verify = (user,userToken,text,text2) =>{
+    return ( user ? `<div id='trueButton' onClick='${()=>{addVideo(userToken)}}'>${text}</div>`:`<a href='#/Login' style='text-align:center;'><div id='falseButton'>${text2}</div></a>`)
   }
  
   let singleVideoExecution = (videoParam,innerView)=>{
@@ -59,6 +59,7 @@ import {listTopics} from './List.js'
       .then(
         function (response) {
         firebase.auth().onAuthStateChanged(function(user) {
+          
          let video = response.result.items[0].snippet
          let text = `
          <div id = 'videoPlayer'>	
@@ -69,7 +70,7 @@ import {listTopics} from './List.js'
               src="http://www.youtube.com/embed/${videoParam}"
               frameborder="0">
               </iframe>
-             ${verify(user,'Add Course','Sign in to save Courses')}
+             ${verify(user,user.uid,'Add Course','Sign in to save Courses')}
             </div>
             <div class='videoDescription'>
             <p>${video.description.replaceAll('\n', '<br>')}</p>
@@ -169,8 +170,9 @@ export let results = ()=>{
       execution(hashSearchString,view,isLoading)
 }
 //adds video to the users collection
-function addVideo(){
-  db.collection(`Users/${userId}/SavedVideos`)
+//userId param is only fillable with firebase Auth
+function addVideo(userToken){
+  db.collection(`Users/${userToken}/SavedVideos`)
                       .add({
                         channelTitle: video.channelTitle,
                         videoTitle: video.title,
