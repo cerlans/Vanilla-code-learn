@@ -154,8 +154,7 @@ export let home = () =>{
 //topics page in the router
 export let topics =()=>{
   firebase.auth().onAuthStateChanged(function(user) {
-        const view = document.getElementById('informationView')
-        // in reality all i really need to change here is the span, but im re-writing the entire html tree
+       
         let text = `
             <div class='topicsMaster'>
                  <div class='topicsHeading'>
