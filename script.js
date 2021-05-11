@@ -15,6 +15,7 @@ import {fireBase} from './fireBase.js'
  }
  
 (() => {
+  gapiLoader()
 })()
 export function gapiLoader (){
    const load = new Promise((resolve,reject)=>{
