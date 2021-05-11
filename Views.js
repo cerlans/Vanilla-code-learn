@@ -208,8 +208,6 @@ function addVideo(userToken,movie,videoId){
                       })
                       .then(() => {
                         console.log("Document successfully written!");
-                        setButtonText("Course Added!");
-                        toggleClass("courseAddedButton");
                       })
                       .catch((error) => {
                         console.error("Error writing document: ", error);
