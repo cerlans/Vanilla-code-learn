@@ -47,9 +47,19 @@ import {gapiLoader} from './script.js'
   }
   //verifies whether user is logged or not and returns conditional text
   const verify = (user,text,text2) =>{
-    return ( user ? `<div id='trueButton'>${text}</div>`:`<a href='#/Login' style='text-align:center;'><div id='falseButton'>${text2}</div></a>`)
+    return ( user ? `<div id='trueButton' class='trueButton'>${text}</div>`:`<a href='#/Login' style='text-align:center;'><div id='falseButton'>${text2}</div></a>`)
   }
- 
+let random = (auth,movie,videoId)=>{
+const informationView = document.getElementById('informationView')
+informationView.addEventListener('click',(event)=>{
+  if(event.target.className === 'trueButton'){
+    console.log(auth.uid)
+    console.log(movie)
+    addVideo(auth.uid,movie,videoId)
+    event.target.innerText = 'video added!'
+  }
+})
+}
   let singleVideoExecution = (videoParam,innerView)=>{
      return gapi.client.youtube.videos
       .list({
@@ -58,8 +68,9 @@ import {gapiLoader} from './script.js'
       })
       .then(
         function (response) {
+          console.log(response)
         firebase.auth().onAuthStateChanged(function(user) {
-          
+         let videoId = response.result.items[0].id
          let video = response.result.items[0].snippet
          let text = `
          <div id = 'videoPlayer'>	
@@ -71,12 +82,14 @@ import {gapiLoader} from './script.js'
               frameborder="0">
               </iframe>
              ${verify(user,'Add Course','Sign in to save Courses')}
+              
             </div>
             <div class='videoDescription'>
             <p>${video.description.replaceAll('\n', '<br>')}</p>
             </div>
          </div>
       `
+      random(user,video,videoId)
       innerView.innerHTML = text
        })
         },
@@ -157,7 +170,6 @@ export let topics =()=>{
   })
 }
 
-
 export let results = () => {
 const view = document.getElementById('informationView')
       let isLoading = true
@@ -185,14 +197,14 @@ const view = document.getElementById('informationView')
 */
 //adds video to the users collection
 //userId param is only fillable with firebase Auth
-function addVideo(userToken){
+function addVideo(userToken,movie,videoId){
   db.collection(`Users/${userToken}/SavedVideos`)
                       .add({
-                        channelTitle: video.channelTitle,
-                        videoTitle: video.title,
-                        videoDescription: video.description,
-                        videoId: id,
-                        videoThumbnail: video.thumbnails.medium.url,
+                        channelTitle: movie.channelTitle,
+                        videoTitle: movie.title,
+                        videoDescription: movie.description,
+                        videoId: videoId,
+                        videoThumbnail: movie.thumbnails.medium.url,
                       })
                       .then(() => {
                         console.log("Document successfully written!");
@@ -223,3 +235,4 @@ export let savedCourses = () => {
 */
 //will verify against the number of courses the user contains in his/her collection, boolean will be used to verify whether to display an empty page with an idicator to add course or show the collection off saved videos.
 }
+
