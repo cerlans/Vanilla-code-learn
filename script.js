@@ -15,19 +15,21 @@ import {fireBase} from './fireBase.js'
  }
  
 (() => {
-     gapiLoader()
 })()
 export function gapiLoader (){
    const load = new Promise((resolve,reject)=>{
           gapi.load("client",resolve);
         })
         load.then((data)=>{
+          
            gapi.client.setApiKey("AIzaSyCFiBdff1JxkTe4F_0auryiuqiYMIJd48g");
-          return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
+           return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
         }).then(()=>{
           console.log('GAPI client loaded for API')
           window.loadInstance = true
+          
           })
+         
 }
 
 // routes for the components that are imported from .Views.js

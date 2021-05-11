@@ -156,21 +156,25 @@ export let topics =()=>{
           
   })
 }
+let firstPart =(param)=>{
+  if(!window.loadInstance){
+     let myPromise = new Promise(function(resolve, myReject) {
+       gapiLoader()
+       return resolve('gapi has loaded')
+     })
+     myPromise.then(()=>{
+       //why the fk is this logging before the above part is complete??????
+       console.log('loading success')
+       param.innerHTML = 'complete'
+       })
+  }
+}
 
-export let results =  ()=>{
-  /* if (!window.loadInstance) {
-      await gapiLoader();
-  }  */
-  const view = document.getElementById('informationView')
-      let isLoading = true
-      if(isLoading) {
-        view.innerHTML =  `
-        <div class='align'>
-        <div class="loader"></div>
-        </div> `
-      }
-      const hashSearchString = window.location.hash.slice(9);
-       execution(hashSearchString,view,isLoading)
+export let results = () => {
+ const view = document.getElementById('informationView')
+ view.innerHTML = 'loading'
+ firstPart(view)
+
 }
 
 /* 
