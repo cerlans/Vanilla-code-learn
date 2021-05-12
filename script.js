@@ -1,5 +1,6 @@
 import {about, home, topics,results,videoPlayer,savedCourses} from './Views.js'
 import {login} from './Login.js'
+import {tutorialView} from './tutorialContainer.js'
 import {fireBase} from './fireBase.js'
 
   //cloud firestore
@@ -41,7 +42,8 @@ let routes = {
     '/Topics/:topicsId' : results,
     '/Topics/:topicsId/:youtubeId' : videoPlayer,
     '/Login': login,
-    '/savedCourses':savedCourses
+    '/savedCourses':savedCourses,
+    '/savedCourses/:youtubeId': tutorialView
 }
 
 const router = Router(routes);

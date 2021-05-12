@@ -35,8 +35,8 @@ import {gapiLoader} from './script.js'
                         <h4> ${value.snippet.channelTitle}</h4>
                         </div>
                       </div>
-                    </a>
                     </div>
+                  </a>
                   `)
                  
                 }).join('')
@@ -117,7 +117,7 @@ export let about =()=>{
 
 let verifyAnon = (anon,standard) =>{
 return (anon ?` <h1>Anonymous user detected</h1>
-	     <p>any saved courses/data will be lost upon signing out or refreshing the page</p>`
+	     <p>any saved courses/data will be lost upon signing out </p>`
 	: `<h1>Welcome ${standard.displayName}</h1>
    <p>Your data will be saved</p>`)
 }
@@ -223,14 +223,48 @@ export let videoPlayer = ()=>{
 
 export let savedCourses = () => {
     const view = document.getElementById('informationView')
-    firebase.auth().onAuthStateChanged((user)=>{
+    firebase.auth().onAuthStateChanged((user) => {
+        let docRef = db.collection(`Users/${user.uid}/SavedVideos`)
+        console.log(docRef)
+        if (user) {
+            docRef.get().then((querySnapshot) => {
+                const tempDoc = querySnapshot.docs.map((doc) => {
+
+                    return {
+                        id: doc.id,
+                        ...doc.data()
+                    }
+                })
+                console.log(tempDoc)
+                return tempDoc
+            }).then((tempDoc)=>{
+              let userSavedVideos = tempDoc.map((value)=>{
+                return `
+                <a href='#/savedCourses/${value.videoId}'>
+                      <div class='video'>
+                        <div class='thumbnail'>
+                          <img src=${value.videoThumbnail} alt='a youtube video'>
+                        </div>
+                        <div class='videoTitle'>
+                        <p>${value.videoTitle}</p>
+                        <h4> ${value.channelTitle}</h4>
+                        </div>
+                      </div>
+                    </div>
+                </a>
+                `
+              }).join('')
+             view.innerHTML = userSavedVideos
+            })
+            
+        } else {
+            view.innerHTML = 'You must be signed in'
+        }
     })
-    view.innerHTML = 'Saved Courses will go here'
     /*
     db.collection("Users").get().then(function(querySnapshot) {      
     console.log(querySnapshot.size); 
 });
 */
-//will verify against the number of courses the user contains in his/her collection, boolean will be used to verify whether to display an empty page with an idicator to add course or show the collection off saved videos.
+    //will verify against the number of courses the user contains in his/her collection, boolean will be used to verify whether to display an empty page with an idicator to add course or show the collection off saved videos.
 }
-
