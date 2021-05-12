@@ -153,6 +153,7 @@ export let home = () =>{
 
 //topics page in the router
 export let topics =()=>{
+  const view = document.getElementById('informationView')
   firebase.auth().onAuthStateChanged(function(user) {
        
         let text = `
