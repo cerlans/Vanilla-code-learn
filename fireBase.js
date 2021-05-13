@@ -1,3 +1,4 @@
+ // creating a seperate file for firebase initi allows the same instance to be used by all files
  const firebaseConfig = {
     apiKey: "AIzaSyCjSYyCaUAoeOhwa5xYNbxpJ668xLpRND0",
     authDomain: "restart-1ad32.firebaseapp.com",
