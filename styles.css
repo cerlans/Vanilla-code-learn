@@ -220,7 +220,7 @@ button {
 }
 
 #player {
-	width: 100%;
+	width: 400px !important;
 	height: 300px;
 }
 
@@ -337,6 +337,7 @@ button {
 	}
 	#videoPlayer #player {
 		height: 400px;
+    
 	}
 	#videoPlayer div {
 		flex: 1;
