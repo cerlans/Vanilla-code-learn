@@ -53,8 +53,7 @@ let random = (auth,movie,videoId)=>{
 const informationView = document.getElementById('informationView')
 informationView.addEventListener('click',(event)=>{
   if(event.target.className === 'trueButton'){
-    console.log(auth.uid)
-    console.log(movie)
+   
     addVideo(auth.uid,movie,videoId)
     event.target.innerText = 'video added!'
   }
