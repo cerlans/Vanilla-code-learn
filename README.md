@@ -1,3 +1,1 @@
-# vanilla-flavor
-
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/vanilla-flavor)
+live link: https://stackblitz.com/edit/code-and-learn
