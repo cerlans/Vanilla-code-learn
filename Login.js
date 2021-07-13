@@ -1,7 +1,7 @@
 //Login component, uses firebase auth drop in solution
 export let login = () => {
    let uiConfig = {
-         signInFlow: 'redirect',
+         signInFlow: 'popup',
         signInSuccessUrl: '/#/',
         signInOptions: [
           // Leave the lines as is for the providers you want to offer your users.
