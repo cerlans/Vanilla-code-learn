@@ -66,6 +66,8 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     //adds the userid and additional information to the firestore database
     // if a returning user re-logs in this function runs but doesn't add anything to firestore DB
+    //my current rule allows this function to create a document based on the user id, if the user auth is not equal to false (hence not logged in)
+    // in this case, if a user is true (logged in) firebase will write this document for each user due to being allowed in firebase rules
     db.collection("Users").doc(user.uid).set({
           userName: user.displayName,
           anonymousLogin: user.isAnonymous,
